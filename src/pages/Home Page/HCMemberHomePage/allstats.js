@@ -12,7 +12,10 @@ const AllStats = ({ emailAddress }) => {
         const dateRange = getDateRange();
         console.log(dateRange);
         console.log("546547548");
-        const response = await axios.post("/detailschart", { emailAddress, timePeriod });
+        const response = await axios.post(
+          "http://newBackendLB-982605735.us-east-1.elb.amazonaws.com:3010/detailschart",
+          { emailAddress, timePeriod }
+        );
         setChartData(response.data.data);
         console.log(response.length);
         console.log("342412489023");

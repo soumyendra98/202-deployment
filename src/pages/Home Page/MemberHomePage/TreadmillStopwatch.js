@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 //import dateFormat from 'dateformat';
-import './member.css';
+import "./member.css";
 import axios from "axios";
 
 function TreadmillStopwatch({ services, location, image }) {
@@ -12,14 +12,17 @@ function TreadmillStopwatch({ services, location, image }) {
 
   useEffect(() => {
     const auth = JSON.parse(localStorage.getItem("auth"));
-    const emailAddress = auth.employees[0].userName
+    const emailAddress = auth.employees[0].userName;
     console.log(emailAddress);
     setEmail(emailAddress);
-    axios.get(`/records?emailAddress=${emailAddress}`)
-      .then(response => {
+    axios
+      .get(
+        `http://newBackendLB-982605735.us-east-1.elb.amazonaws.com:3010/records?emailAddress=${emailAddress}`
+      )
+      .then((response) => {
         setRecord(response.data);
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
       });
     const savedTimer = localStorage.getItem("timer");
@@ -35,20 +38,21 @@ function TreadmillStopwatch({ services, location, image }) {
     setStopwatchStatus("Started");
     const startTime = Date.now();
     const auth = JSON.parse(localStorage.getItem("auth"));
-    const emailAddress = auth.employees[0].userName
+    const emailAddress = auth.employees[0].userName;
     setTimer(startTime);
     localStorage.setItem("timer", startTime);
     const bookingData = {
       emailAddress,
       location,
       services,
-      startTime
+      startTime,
     };
-    axios.post('/bookings', bookingData)
-      .then(response => {
+    axios
+      .post("/bookings", bookingData)
+      .then((response) => {
         console.log(response.data);
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
       });
   };
@@ -57,21 +61,22 @@ function TreadmillStopwatch({ services, location, image }) {
     setStopwatchStatus("Stopped");
     const endTime = Date.now();
     const diff = Math.abs(endTime - timer);
-    const timeInterval=Math.floor((diff/1000));
+    const timeInterval = Math.floor(diff / 1000);
     const auth = JSON.parse(localStorage.getItem("auth"));
     const emailAddress = auth.employees[0].userName;
     console.log(timeInterval);
-    console.log("$#$#$#$#")
+    console.log("$#$#$#$#");
     // setElapsedTime(timeInterval)
-    
-    axios.post(`/bookings/${emailAddress}`, {endTime, timeInterval})
-      .then(response => {
+
+    axios
+      .post(`/bookings/${emailAddress}`, { endTime, timeInterval })
+      .then((response) => {
         console.log(response.data);
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
       });
-  };  
+  };
 
   const handleReset = () => {
     setStopwatchStatus("Reset");
@@ -86,8 +91,8 @@ function TreadmillStopwatch({ services, location, image }) {
     if (timer) {
       interval = setInterval(() => {
         //const elapsedTime = Date.now() - timer;
-        setElapsedTime(prevElapsedTime => prevElapsedTime + elapsedTime);
-        localStorage.setItem("elapsedTime", prevElapsedTime => prevElapsedTime + elapsedTime);
+        setElapsedTime((prevElapsedTime) => prevElapsedTime + elapsedTime);
+        localStorage.setItem("elapsedTime", (prevElapsedTime) => prevElapsedTime + elapsedTime);
       }, 1);
     }
     return () => clearInterval(interval);
@@ -108,4 +113,4 @@ function TreadmillStopwatch({ services, location, image }) {
   );
 }
 
-export default TreadmillStopwatch
+export default TreadmillStopwatch;

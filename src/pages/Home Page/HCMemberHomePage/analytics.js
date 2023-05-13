@@ -15,7 +15,10 @@ function AnalyticsDashboard() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await axios.post("/barchart", { location });
+        const response = await axios.post(
+          "http://newBackendLB-982605735.us-east-1.elb.amazonaws.com:3010/barchart",
+          { location }
+        );
         setChartData(response.data.data);
       } catch (error) {
         console.error(error);
@@ -44,11 +47,14 @@ function AnalyticsDashboard() {
     console.log("range" + r);
     console.log(startDate + "   ---->   " + endDate);
     const fetchData = async () => {
-      const response = await axios.post("/hourschart", {
-        location,
-        startDate,
-        endDate,
-      });
+      const response = await axios.post(
+        "http://newBackendLB-982605735.us-east-1.elb.amazonaws.com:3010/hourschart",
+        {
+          location,
+          startDate,
+          endDate,
+        }
+      );
       setChartData(response.data);
     };
     fetchData();

@@ -55,14 +55,17 @@ const SignupForm = () => {
     e.preventDefault();
     try {
       setType(type);
-      const response = await axios.post("/all/signup", {
-        type,
-        firstName,
-        lastName,
-        emailAddress,
-        username,
-        password,
-      });
+      const response = await axios.post(
+        "http://newBackendLB-982605735.us-east-1.elb.amazonaws.com:3010/all/signup",
+        {
+          type,
+          firstName,
+          lastName,
+          emailAddress,
+          username,
+          password,
+        }
+      );
       console.log(ErrorResponse);
       console.log(response.data);
       navigate("/login");

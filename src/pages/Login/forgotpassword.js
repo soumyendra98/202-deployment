@@ -1,16 +1,19 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
 const ForgotPassword = () => {
-  const [emailAddress, setEmail] = useState('');
-  const [message, setMessage] = useState('');
+  const [emailAddress, setEmail] = useState("");
+  const [message, setMessage] = useState("");
 
   const handleForgotPassword = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('/forgot-password', { emailAddress });
+      const response = await axios.post(
+        "http://newBackendLB-982605735.us-east-1.elb.amazonaws.com:3010/forgot-password",
+        { emailAddress }
+      );
       setMessage(response.data.message);
     } catch (error) {
       console.error(error);
@@ -29,11 +32,11 @@ const ForgotPassword = () => {
         />
       </div>
       <div>
-      <button type="submit">Submit</button>
-      <Link to="/login" className="text-body">
-                         Login
-                    </Link>
-       </div>
+        <button type="submit">Submit</button>
+        <Link to="/login" className="text-body">
+          Login
+        </Link>
+      </div>
       {message && <p>{message}</p>}
     </form>
   );

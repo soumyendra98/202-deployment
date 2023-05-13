@@ -1,18 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend } from 'recharts';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend } from "recharts";
+import axios from "axios";
 
 const Activities = ({ emailAddress }) => {
   const [chartData, setChartData] = useState([]);
-  const [timePeriod, setTimePeriod] = useState('7');
+  const [timePeriod, setTimePeriod] = useState("7");
 
   useEffect(() => {
     async function fetchData() {
       try {
         const dateRange = getDateRange();
         console.log(dateRange);
-        console.log("546547548")
-        const response = await axios.post('/detailschart', { emailAddress, timePeriod });
+        console.log("546547548");
+        const response = await axios.post(
+          "http://newBackendLB-982605735.us-east-1.elb.amazonaws.com:3010/detailschart",
+          { emailAddress, timePeriod }
+        );
         setChartData(response.data.data);
         console.log(response.length);
         console.log("342412489023");
@@ -28,16 +31,16 @@ const Activities = ({ emailAddress }) => {
     let startDate = new Date();
 
     switch (timePeriod) {
-      case '1day':
+      case "1day":
         startDate.setDate(endDate.getDate() - 1);
         break;
-      case '1week':
+      case "1week":
         startDate.setDate(endDate.getDate() - 7);
         break;
-      case '1month':
+      case "1month":
         startDate.setMonth(endDate.getMonth() - 1);
         break;
-      case '90days':
+      case "90days":
         startDate.setDate(endDate.getDate() - 90);
         break;
       default:
@@ -57,10 +60,18 @@ const Activities = ({ emailAddress }) => {
       <div>
         <label htmlFor="time-period-select">Select time period:</label>
         <select id="time-period-select" value={timePeriod} onChange={handleTimePeriodChange}>
-          <option label= "1 day" value="1">1 day</option>
-          <option label= "1 week" value="7">1 week</option>
-          <option label= "1 month" value="30">1 month</option>
-          <option label= "90 days" value="90">90 days</option>
+          <option label="1 day" value="1">
+            1 day
+          </option>
+          <option label="1 week" value="7">
+            1 week
+          </option>
+          <option label="1 month" value="30">
+            1 month
+          </option>
+          <option label="90 days" value="90">
+            90 days
+          </option>
         </select>
       </div>
       {chartData.length ? (

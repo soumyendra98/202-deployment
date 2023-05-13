@@ -30,7 +30,9 @@ function Clsses() {
   };
   const getLocations = async () => {
     try {
-      const locations = await axios.get("/locations");
+      const locations = await axios.get(
+        "http://newBackendLB-982605735.us-east-1.elb.amazonaws.com:3010/locations"
+      );
       setData(locations.data);
       setExercises(data.filter((item) => item.name === location) || null);
     } catch (error) {

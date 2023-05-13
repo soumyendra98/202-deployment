@@ -26,7 +26,10 @@ const EnrollForm = () => {
           service: service,
         };
         console.log(1);
-        const response = await axios.post("/enrollments", data);
+        const response = await axios.post(
+          "http://newBackendLB-982605735.us-east-1.elb.amazonaws.com:3010/enrollments",
+          data
+        );
         console.log(response);
         setEnrollmentExists(true);
         console.log(enrollmentExists);
@@ -73,9 +76,15 @@ const EnrollForm = () => {
 
     try {
       if (!checked) {
-        await axios.post(`/updatetype/${emailAddress}`, { type });
+        await axios.post(
+          `http://newBackendLB-982605735.us-east-1.elb.amazonaws.com:3010/updatetype/${emailAddress}`,
+          { type }
+        );
       }
-      const response = await axios.post("/all/enroll", enrollData);
+      const response = await axios.post(
+        "http://newBackendLB-982605735.us-east-1.elb.amazonaws.com:3010/all/enroll",
+        enrollData
+      );
       navigate("/hcmember");
       console.log(response.data);
     } catch (error) {
