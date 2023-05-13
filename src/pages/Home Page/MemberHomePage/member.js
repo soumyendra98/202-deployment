@@ -24,7 +24,9 @@ function Member(props) {
     console.log(emailAddress);
     setEmail(emailAddress);
     axios
-      .get(`/records?emailAddress=${emailAddress}`)
+      .get(
+        `http://newBackendLB-982605735.us-east-1.elb.amazonaws.com:3010//records?emailAddress=${emailAddress}`
+      )
       .then((response) => {
         setRecord(response.data);
         console.log(response.data);

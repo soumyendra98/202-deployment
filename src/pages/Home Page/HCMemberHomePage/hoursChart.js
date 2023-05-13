@@ -15,9 +15,12 @@ const HoursChart = () => {
 
     // console.log(startDate+"   ---->"+endDate)
     const fetchData = async () => {
-      const response = await axios.post("/hourschart", {
-        location,
-      });
+      const response = await axios.post(
+        "http://newBackendLB-982605735.us-east-1.elb.amazonaws.com:3010/hourschart",
+        {
+          location,
+        }
+      );
       setChartData(response.data);
     };
     fetchData();

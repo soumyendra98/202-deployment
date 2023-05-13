@@ -139,7 +139,7 @@ function LoginComponent(props) {
     // check if username and password are correct
     //implement the functionality with api
     return axios
-      .post("/all/login", {
+      .post("http://newBackendLB-982605735.us-east-1.elb.amazonaws.com:3010/all/login", {
         emailAddress: emailAddress,
         password: password,
       })

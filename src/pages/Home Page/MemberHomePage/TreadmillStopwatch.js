@@ -48,7 +48,7 @@ function TreadmillStopwatch({ services, location, image }) {
       startTime,
     };
     axios
-      .post("/bookings", bookingData)
+      .post("http://newBackendLB-982605735.us-east-1.elb.amazonaws.com:3010/bookings", bookingData)
       .then((response) => {
         console.log(response.data);
       })
@@ -69,7 +69,10 @@ function TreadmillStopwatch({ services, location, image }) {
     // setElapsedTime(timeInterval)
 
     axios
-      .post(`/bookings/${emailAddress}`, { endTime, timeInterval })
+      .post(
+        `http://newBackendLB-982605735.us-east-1.elb.amazonaws.com:3010/bookings/${emailAddress}`,
+        { endTime, timeInterval }
+      )
       .then((response) => {
         console.log(response.data);
       })
