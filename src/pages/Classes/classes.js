@@ -58,24 +58,24 @@ function Clsses() {
           onMenuClose={onMenuClose}
           onChange={handleSelectChange}
           styles={customStyles}
-        />{" "}
-      </div>{" "}
+        />
+      </div>
       {exercises &&
         exercises.map((exercise) => (
           <div className="grid-block">
             <h2>
-              <b> {exercise.services} </b>{" "}
-            </h2>{" "}
+              <b> {exercise.services} </b>
+            </h2>
             <p>
-              <b> Class Days: </b> {exercise.classDay}{" "}
-            </p>{" "}
-            <br> </br>{" "}
+              <b> Class Days: </b> {exercise.classDay}
+            </p>
+            <br />
             <p>
-              <b> In / Out Time: </b> 06:00 AM - 10:00 PM{" "}
-            </p>{" "}
-            <br> </br>{" "}
+              <b> In / Out Time: </b> 06:00 AM - 10:00 PM
+            </p>
+            <br />
           </div>
-        ))}{" "}
+        ))}
     </div>
   );
 }
