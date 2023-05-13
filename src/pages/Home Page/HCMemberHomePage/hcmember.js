@@ -30,7 +30,7 @@ const HCMember = () => {
 
   useEffect(() => {
     axios
-      .get("/nonusers")
+      .get("http://newBackendLB-982605735.us-east-1.elb.amazonaws.com:3010/nonusers")
       .then((response) => {
         SetNonmembers(response.data);
       })
@@ -65,7 +65,7 @@ const HCMember = () => {
       checkInTime: new Date(),
     };
     axios
-      .post("/checkin", checkinData)
+      .post("http://newBackendLB-982605735.us-east-1.elb.amazonaws.com:3010/checkin", checkinData)
       .then((response) => {
         const newCheckinRecord = response.data;
         const updatedMembers = members.map((m) => {
@@ -92,7 +92,7 @@ const HCMember = () => {
       checkOutTime: new Date(),
     };
     axios
-      .post("/checkout", checkoutData)
+      .post("http://newBackendLB-982605735.us-east-1.elb.amazonaws.com:3010/checkout", checkoutData)
       .then((response) => {
         const newCheckoutRecord = response.data;
         const updatedMembers = members.map((m) => {
